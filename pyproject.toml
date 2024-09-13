@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "db"
+version = "0.1.0"
+description = ""
+authors = ["Blackgolyb <andrejomelnickij@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+textual = "^0.79.1"
+pydantic = "^2.9.1"
+pydantic-settings = "^2.5.2"
+envparse = "^0.2.0"
+sqlalchemy = "^2.0.34"
+psycopg = "^3.2.1"
+
+
+[tool.poetry.group.dev.dependencies]
+textual-dev = "^1.6.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,21 @@
+DROP VIEW IF EXISTS students_info;
+
+DROP VIEW IF EXISTS best_grades;
+
+DROP VIEW IF EXISTS grades_with_ects;
+
+DROP TABLE IF EXISTS ects;
+
+DROP TABLE IF EXISTS grades;
+
+DROP TABLE IF EXISTS profiles;
+
+DROP TABLE IF EXISTS students;
+
+DROP TABLE IF EXISTS subjects;
+
+DROP TABLE IF EXISTS teachers;
+
+DROP TABLE IF EXISTS groups;
+
+DROP TABLE IF EXISTS faculties;
