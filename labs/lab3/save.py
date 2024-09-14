@@ -1,8 +1,8 @@
-from ..task import RunSQLFileTask
+from ..task import DisplayTablesTask
 from labs.db import drop, migrate, fill_v2, save
 from labs.config import PROJECT_FOLDER, ALL_TABLES
 
-class Save(RunSQLFileTask):
+class Save(DisplayTablesTask):
     """
     Lab 3 Export data to CSV file
     """

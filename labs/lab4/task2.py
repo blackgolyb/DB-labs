@@ -1,18 +1,15 @@
-from ..task import RunSQLFileTask
-from labs.db import drop, get_table, migrate, run_sql_file, fill_v2
+from ..task import RunSQLFilesTask
+from labs.db import fill_v2
 from labs.config import SQL_FOLDER
 
 LAB_FOLDER = SQL_FOLDER / "queries"
 
-class Task2(RunSQLFileTask):
+
+class Task2(RunSQLFilesTask):
     """
     Lab 4 group select
     """
 
-    def run(self):
-        drop()
-        migrate(1)
-        fill_v2()
-        groups = get_table(run_sql_file(LAB_FOLDER / "count_students_per_group.sql"))
-
-        return [groups]
+    sql_files = [LAB_FOLDER / "count_students_per_group.sql"]
+    migration_version = 1
+    fill_function = fill_v2

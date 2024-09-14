@@ -1,10 +1,10 @@
-from ..task import RunSQLFileTask
+from ..task import DisplayTablesTask
 from labs.db import drop, get_table, migrate, load, run_sql_file
 from labs.config import SQL_FOLDER, PROJECT_FOLDER, ALL_TABLES
 
 LAB_FOLDER = SQL_FOLDER / "queries"
 
-class Load(RunSQLFileTask):
+class Load(DisplayTablesTask):
     """
     Lab 3 Expoort data to CSV file
     """

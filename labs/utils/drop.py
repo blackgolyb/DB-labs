@@ -1,15 +1,7 @@
-from ..task import RunSQLFileTask
-
-from labs.db import run_sql_file
-from labs.config import SQL_FOLDER
+from ..task import RunSQLFilesTask
 
 
-class DropAll(RunSQLFileTask):
+class DropAll(RunSQLFilesTask):
     """
-    Helper for droop all tables 
+    Helper for droop all tables
     """
-
-    def run(self):
-        run_sql_file(SQL_FOLDER / "drop.sql")
-        
-        return []

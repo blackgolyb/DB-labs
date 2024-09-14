@@ -1,16 +1,12 @@
-from ..task import RunSQLFileTask
+from ..task import RunSQLFilesTask
 
-from labs.db import drop, fill_v3, migrate
+from labs.db import fill_v3
 
 
-class FillJoin(RunSQLFileTask):
+class FillJoin(RunSQLFilesTask):
     """
-    Helper for fill fist second of db
+    Helper for test join queries
     """
 
-    def run(self):
-        drop()
-        migrate(1)
-        fill_v3()
-
-        return []
+    migration_version = 2
+    fill_function = fill_v3

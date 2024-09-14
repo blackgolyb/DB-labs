@@ -1,9 +1,9 @@
-from ..task import RunSQLFileTask
+from ..task import DisplayTablesTask
 
 from labs.db import drop, migrate, fill_v1
 
 
-class Task1(RunSQLFileTask):
+class Task1(DisplayTablesTask):
     """
     Lab 1 Task 1 Create initial tables 
     """

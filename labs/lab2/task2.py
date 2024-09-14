@@ -1,6 +1,6 @@
 import logging
 
-from ..task import RunSQLFileTask
+from ..task import DisplayTablesTask
 from labs.db import drop, migrate, fill_v2, run_sql_file, get_table
 from labs.config import SQL_FOLDER, MIGRATONS_FOLDER
 
@@ -8,7 +8,7 @@ LAB_FOLDER = SQL_FOLDER / "queries"
 logger = logging.getLogger(__name__)
 
 
-class Task2(RunSQLFileTask):
+class Task2(DisplayTablesTask):
     """
     Lab 2 Task 2 Downgrade student profile
     """

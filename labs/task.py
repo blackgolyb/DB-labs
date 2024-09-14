@@ -1,3 +1,6 @@
+from functools import partial
+from pathlib import Path
+from typing import Callable
 from textual.app import ComposeResult
 
 from textual.widgets import Static, Button, Markdown, DataTable
@@ -8,6 +11,8 @@ from textual.widget import Widget
 from abc import abstractmethod
 
 import logging
+
+from labs.db import drop, get_table, migrate, run_sql_file
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +30,7 @@ class Task(Widget):
     def compose(self) -> ComposeResult: ...
 
 
-class RunSQLFileTask(Task):
+class DisplayTablesTask(Task):
     res = reactive(None, recompose=True)
 
     def compose(self):
@@ -36,7 +41,7 @@ class RunSQLFileTask(Task):
                 yield Static("No Result")
             else:
                 yield from self.get_tables()
-                
+
     def get_control(self):
         yield Button("Run", id="run")
 
@@ -58,6 +63,46 @@ class RunSQLFileTask(Task):
         if event.button.id == "run":
             logger.debug("run")
             self.res = self.run()
+
+
+class RunSQLFilesTask(DisplayTablesTask):
+    sql_files: list[tuple[Path, bool] | Path] = []
+    migration_version: int = -1
+    need_drop: bool = True
+    fill_function: Callable[[], None] = lambda: None
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fill_function = partial(self.fill_function)
+
+    @classmethod
+    def fill(cls):
+        cls.fill_function()
+
+    def run(self):
+        results = []
+
+        if self.need_drop:
+            drop()
+            if self.migration_version >= 0:
+                migrate(self.migration_version)
+
+        self.fill()
+
+        for command in self.sql_files:
+            extract_table = True
+            sql_file = None
+
+            if isinstance(command, tuple):
+                sql_file, extract_table = command
+            else:
+                sql_file = command
+
+            res = run_sql_file(sql_file)
+            if extract_table:
+                results.append(get_table(res))
+
+        return results
 
 
 class TaskGroup:

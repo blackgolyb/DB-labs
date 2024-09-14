@@ -1,16 +1,12 @@
-from ..task import RunSQLFileTask
+from ..task import RunSQLFilesTask
 
-from labs.db import drop, fill_v1, migrate
+from labs.db import fill_v1
 
 
-class FillFirst(RunSQLFileTask):
+class FillFirst(RunSQLFilesTask):
     """
     Helper for fill fist version of db
     """
 
-    def run(self):
-        drop()
-        migrate(0)
-        fill_v1()
-
-        return []
+    migration_version = 0
+    fill_function = fill_v1
