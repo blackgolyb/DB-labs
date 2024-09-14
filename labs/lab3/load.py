@@ -6,7 +6,7 @@ LAB_FOLDER = SQL_FOLDER / "queries"
 
 class Load(DisplayTablesTask):
     """
-    Lab 3 Expoort data to CSV file
+    Lab 3 Import data to CSV file
     """
 
     def run(self):
