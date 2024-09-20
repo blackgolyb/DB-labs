@@ -35,6 +35,11 @@ def run_sql_file(filename: Path):
     return res
 
 
+def run_sql_file_service(session, filename: Path):
+    query = filename.read_text()
+    return session.execute(text(query))
+
+
 def run_sql_test(query: str):
     with get_session() as session:
         res = session.execute(text(query))

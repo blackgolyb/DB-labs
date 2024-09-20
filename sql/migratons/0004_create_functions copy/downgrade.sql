@@ -1,0 +1,3 @@
+DROP FUNCTION count_students_in_group;
+
+DROP FUNCTION count_students_in_faculty;

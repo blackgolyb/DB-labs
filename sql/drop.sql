@@ -1,3 +1,13 @@
+DROP FUNCTION IF EXISTS count_students_in_group;
+
+DROP FUNCTION IF EXISTS count_students_in_faculty;
+
+DROP PROCEDURE IF EXISTS add_teacher;
+
+DROP PROCEDURE IF EXISTS get_count_students_in_group;
+
+DROP PROCEDURE IF EXISTS get_student_info;
+
 DROP VIEW IF EXISTS students_info;
 
 DROP VIEW IF EXISTS best_grades;

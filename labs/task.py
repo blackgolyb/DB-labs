@@ -12,7 +12,7 @@ from abc import abstractmethod
 
 import logging
 
-from labs.db import drop, get_table, migrate, run_sql_file
+from labs.db import drop, get_session, get_table, migrate, run_sql_file, run_sql_file_service
 
 logger = logging.getLogger(__name__)
 
@@ -89,18 +89,21 @@ class RunSQLFilesTask(DisplayTablesTask):
 
         self.fill()
 
-        for command in self.sql_files:
-            extract_table = True
-            sql_file = None
+        with get_session() as session:
+            for command in self.sql_files:
+                extract_table = True
+                sql_file = None
 
-            if isinstance(command, tuple):
-                sql_file, extract_table = command
-            else:
-                sql_file = command
+                if isinstance(command, tuple):
+                    sql_file, extract_table = command
+                else:
+                    sql_file = command
 
-            res = run_sql_file(sql_file)
-            if extract_table:
-                results.append(get_table(res))
+                res = run_sql_file_service(session, sql_file)
+                if extract_table:
+                    results.append(get_table(res))
+                    
+            session.commit()
 
         return results
 

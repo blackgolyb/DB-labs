@@ -10,6 +10,8 @@ from .lab3 import lab as lab3
 from .lab4 import lab as lab4
 from .lab5 import lab as lab5
 from .lab6 import lab as lab6
+from .lab7 import lab as lab7
+from .lab8 import lab as lab8
 from .utils import utils
 
 
@@ -92,5 +94,7 @@ def create_app() -> App:
         lab4,
         lab5,
         lab6,
+        lab7,
+        lab8,
     ]
     return App({"labs": tasks})
